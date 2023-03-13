@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+# This function uses an additional package called 'jq'
+# Select a command to run with 'npm run'
+fnr () {
+  if ! [ -f package.json ]; then
+    echo "No package.json in dir $(pwd)"
+    return 1
+  fi
+
+  if command -v "jq" &> /dev/null; then
+    echo "Dependency jq not found. Please install before running."
+    return 1
+  fi
+
+  local query="${*}"
+  local selection="$(cat package.json |
+    jq -r '.scripts | keys[]' |
+    sort |
+    fzf --query "$query" --height 50% --min-height 20 --border)"
+
+  if [ -z "$selection" ]; then
+    return 1
+  fi
+
+  npm run "$selection"
+}

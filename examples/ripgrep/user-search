@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+if [ $# -eq 0 ]; then
+  echo "Error: No argument to search"
+  exit 1
+fi
+
+rg --smart-case "$1" -- /etc/passwd | bat -pp --language passwd

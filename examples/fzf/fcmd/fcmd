@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+# Helpers
+SCRIPT_DIR="$(dirname -- $0)"
+ROOT_DIR="$(cd $SCRIPT_DIR && cd ../.. && pwd)"
+
+# Use a script file as a command
+fzf_defaults="$ROOT_DIR/fzf/fzf-defaults/fzf-defaults"
+
+# Show aliases and functions in current session
+available_commands="$(if [[ "$SHELL" =~ bash ]]; then
+    {
+      typeset -F | awk '{ if ( $3 !~ /_.+/) { print $3 } }';
+      alias | awk '{ split($2,o,"="); print o[1] }'
+    }
+  else
+    {
+      print -l ${(ok)functions} |
+        awk '{ if ($1 !~ /^_.+/) { print $1 } }';
+      compgen -a
+    }
+  fi | sort)"
+
+tmpfile="$(mktemp)"
+
+# Cleanup file on exit
+trap "rm -- '$tmpfile'" EXIT
+
+# Get the output of type and store it in tmpfile
+for cm in $(echo ${available_commands}); do
+  echo ""
+  type -f "$cm" 2>/dev/null || type "$cm" 2>/dev/null
+done > "$tmpfile"
+
+echo "$available_commands" |
+  "$fzf_defaults" \
+    --preview "rg -A 50 -B 1 -m 1 '^{} ' $tmpfile | bat -l bash --color=always -p -H 2" \
+    --preview-window right:70% \
+    --bind 'ctrl-y:execute-silent(echo -n {} | pbcopy)+abort' || (exit 0) && true

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns:tizen="http://tizen.org/ns/widgets" xmlns="http://www.w3.org/ns/widgets" id="http://xdk.accedo.tv/viki" version="0.18.4" viewmodes="maximized">
+    <access origin="*" subdomains="true"></access>
+    <tizen:application id="FAmbPcaNsn.Cogeco" package="FAmbPcaNsn" required_version="2.3"/>
+    <content src="index.html"/>
+    <tizen:content-security-policy>*</tizen:content-security-policy>
+    <feature name="http://tizen.org/feature/screen.size.all"/>
+    <feature name="http://tizen.org/feature/screen.size.normal.1080.1920"/>
+    <feature name="http://tizen.org/feature/screen.size.all"/>
+    <feature name="http://www.samsungdforum.com/feature/Mouse"/>
+    <feature name="http://tizen.org/feature/network.wifi"/>
+    <icon src="logo.png"/>
+    <name>EPICO</name>
+    <tizen:setting screen-orientation="landscape" background-support="disable" encryption="disable" hwkey-event="enable"/>
+    <tizen:privilege name="http://developer.samsung.com/privilege/network.public"/>
+    <tizen:privilege name="http://developer.samsung.com/privilege/productinfo"/>
+    <tizen:privilege name="http://developer.samsung.com/privilege/widgetdata"/>
+    <tizen:privilege name="http://tizen.org/privilege/application.launch"/>
+    <tizen:privilege name="http://tizen.org/privilege/tv.inputdevice"/>
+    <tizen:privilege name="http://tizen.org/privilege/wifidirect"/>
+    <tizen:privilege name="http://tizen.org/privilege/filesystem.read"/>
+    <tizen:privilege name="http://tizen.org/privilege/filesystem.write"/>
+    <tizen:privilege name="http://tizen.org/privilege/tv.audio"/>
+    <tizen:privilege name="http://tizen.org/privilege/tv.channel"/>
+    <tizen:privilege name="http://tizen.org/privilege/tv.display"/>
+    <tizen:privilege name="http://tizen.org/privilege/tv.window"/>
+    <tizen:privilege name="http://developer.samsung.com/privilege/avplay"/>
+    <tizen:privilege name="http://developer.samsung.com/privilege/hostedapp_deviceapi_allow"/>
+    <tizen:profile name="tv-samsung"/>
+</widget>

@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# Accept one argument for the location to search in.
+location="${1:-$HOME}"
+
+# Regex version
+# fd --type file '\.pdf$' . "$location"
+
+# Use extension search argument
+fd -e pdf . "$location"

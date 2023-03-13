@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+if ! [ -f /etc/passwd ]; then
+  echo "Error: /etc/passwd does not exist in the current platform!"
+  exit 1
+fi
+
+if [ $# -eq 0 ]; then
+  echo "Error: No argument to search"
+  exit 1
+fi
+
+lines=$(rg --smart-case --line-number "$1" -- /etc/passwd | cut -d ":" -f 1)
+bat_args=""
+
+if [ -z "$lines" ]; then
+    echo "No user found"
+    exit 1
+fi
+
+for line_number in $lines; do
+  bat_args="$bat_args --highlight-line $line_number"
+done
+
+bat $bat_args -pp /etc/passwd

@@ -1,0 +1,16 @@
+{
+  "name": "shell-startup-and-tools",
+  "version": "1.0.0",
+  "description": "Repository with shell scripts for demos of tools",
+  "main": "index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "hello": "echo Hello Accedo!",
+    "build": "echo Building important files...",
+    "fshow": "./examples/fzf/fshow/fshow"
+  },
+  "author": "Eduardo Sanchez",
+  "license": "ISC"
+}

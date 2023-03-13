@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+# Helpers
+SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)"
+ROOT_DIR="$(cd $SCRIPT_DIR && cd ../.. && pwd)"
+
+# Use a script file as a command
+fzf_defaults="$ROOT_DIR/fzf/fzf-defaults/fzf-defaults"
+
+# Show environment variables
+showValue=false
+
+if [ "$1" = '-v' ]; then
+  showValue=true
+fi
+
+tmpfile="$(mktemp)"
+# Cleanup file on exit
+trap "rm -- '$tmpfile'" EXIT
+
+while IFS='=' read -r -d '' n v; do
+  printf "%s=%s\n" "$n" "${v//$'\n'}"
+done < <(env -0) > "$tmpfile"
+
+cat -v "$tmpfile" |
+  "$fzf_defaults" \
+    --preview 'printf "%q" {}' --preview-window up:3:hidden:wrap \
+    --bind 'ctrl-/:toggle-preview' \
+    --bind 'ctrl-s:toggle-sort' \
+    --bind 'ctrl-y:execute-silent(printf "%q" {} | pbcopy)+abort' \
+    --color header:italic \
+    --header 'Press CTRL-Y to copy command into clipboard' |
+  cut -d '=' -f "$(if [ "$showValue" = true ]; then echo "2-"; else echo "1"; fi)" |
+  sed -E 's/^[[:space:]]*//' | sed -E 's/[[:space:]]*$//'
