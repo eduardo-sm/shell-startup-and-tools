@@ -8,10 +8,18 @@ is_command () {
 }
 
 if is_command rg; then
-  export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --glob "!node_modules" --glob "!.git" --follow'
+  # Include '--hidden' to show hidden files
+  # Include '--no-ignore' to show ignored files like the ones listed in .gitignore
+  # Inlcude '-uu' for both --hidden and --no-ignore
+
+  export FZF_DEFAULT_COMMAND='rg --files --follow --glob "!node_modules" --glob "!.git"'
 fi
 
 if is_command fd; then
+  # Include '--hidden' to show hidden files
+  # Include '--no-ignore' to show ignored files like the ones listed in .gitignore
+  # Inlcude '--unrestricted' for both --hidden and --no-ignore
+
   export FZF_CTRL_T_COMMAND="fd --type f --follow --exclude .git --exclude node_modules"
   export FZF_ALT_C_COMMAND="fd --type d --follow --exclude .git --exclude node_modules"
 

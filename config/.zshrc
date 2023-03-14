@@ -59,3 +59,11 @@ if command -v fzf &> /dev/null; then
   fzf_functions="$HOME/fzf-functions"
   [ -f "$fzf_functions" ] && source "$fzf_functions"
 fi
+
+# ZSH Plugins
+
+# Autosuggestion
+[ -f ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ] && source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Syntax highlighting
+[ -f ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
