@@ -2,7 +2,7 @@
 
 # Helper to get aliases and functions in the current shell
 getShellAliasAndFunctions () {
-  if [[ -n "$$BASH" ]]; then
+  if [[ -n "$BASH" ]]; then
     {
       # BASH
       # Functions

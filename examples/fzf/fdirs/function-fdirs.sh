@@ -5,7 +5,10 @@
 fdirs () {
   local selection="$(dirs -v |
     fzf-defaults \
-      --preview 'echo "Path: {2..}\n"; ls -AFL --color=always $(bash -c "echo "{2..})' |
+      --preview '
+        echo "Path: {2..}"
+        echo ""
+        ls -AFL --color=always $(bash -c "echo "{2..})' |
     awk '{print $1}')"
 
   if [ -n "$selection" ]; then

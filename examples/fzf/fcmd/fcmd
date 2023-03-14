@@ -8,7 +8,7 @@ ROOT_DIR="$(cd $SCRIPT_DIR && cd ../.. && pwd)"
 fzf_defaults="$ROOT_DIR/fzf/fzf-defaults/fzf-defaults"
 
 # Show aliases and functions in current session
-available_commands="$(if [[ "$SHELL" =~ bash ]]; then
+available_commands="$(if [[ -n "$BASH" ]]; then
     {
       typeset -F | awk '{ if ( $3 !~ /_.+/) { print $3 } }';
       alias | awk '{ split($2,o,"="); print o[1] }'
