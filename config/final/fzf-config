@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+
+# This file is meant to be sourced in .bashrc or .zshrc
+
+# Identify if command exist
+is_command () {
+	command -v "$1" &> /dev/null
+}
+
+if is_command rg; then
+  export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --glob "!node_modules" --glob "!.git" --follow'
+fi
+
+if is_command fd; then
+  export FZF_CTRL_T_COMMAND="fd --type f --follow --exclude .git --exclude node_modules"
+  export FZF_ALT_C_COMMAND="fd --type d --follow --exclude .git --exclude node_modules"
+
+  # command for listing path candidates.
+  _fzf_compgen_path () {
+    fd --hidden --follow --exclude ".git" --exclude "node_modules" . "$1"
+  }
+
+  # Use fd to generate the list for directory completion
+  _fzf_compgen_dir () {
+    fd --type d --hidden --follow --exclude ".git" --exclude "node_modules" . "$1"
+  }
+fi
+
+# The pbcopy can be installed with scoop in windows
+# $ scoop bucket add extras
+# $ scoop install pasteboard
+# On linux it can be replaced by xsel
+# xsel -ib
+if is_command pbcopy; then
+  export FZF_CTRL_R_OPTS="
+    --preview 'echo {}' --preview-window up:3:hidden:wrap
+    --bind 'ctrl-/:toggle-preview'
+    --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+    --color header:italic
+    --header 'Press CTRL-Y to copy command into clipboard'"
+elif is_command xsel; then
+  export FZF_CTRL_R_OPTS="
+    --preview 'echo {}' --preview-window up:3:hidden:wrap
+    --bind 'ctrl-/:toggle-preview'
+    --bind 'ctrl-y:execute-silent(echo -n {2..} | xsel -ib)+abort'
+    --color header:italic
+    --header 'Press CTRL-Y to copy command into clipboard'"
+else
+  export FZF_CTRL_R_OPTS="
+    --preview 'echo {}' --preview-window up:3:hidden:wrap
+    --bind 'ctrl-/:toggle-preview'
+    --color header:italic
+    --header 'Press CTRL-/ to open preview'"
+fi
+
+export FZF_ALT_C_OPTS="
+  --preview 'ls -AF --color=always {-1} 2> /dev/null'
+  --bind 'ctrl-/:change-preview-window(down|hidden|),alt-up:preview-page-up,alt-down:preview-page-down,ctrl-s:toggle-sort'"
+
+export FZF_CTRL_T_OPTS="
+  --preview 'if [ -f {} ]; then
+      bat -pp --color=always --style=numbers {}
+    else
+      "'echo "Path: $(realpath {})"'"
+      echo ''
+      ls -AFL --color=always {} 2> /dev/null
+    fi'
+  --bind 'ctrl-/:change-preview-window(down|hidden|),alt-up:preview-page-up,alt-down:preview-page-down,ctrl-s:toggle-sort'"
