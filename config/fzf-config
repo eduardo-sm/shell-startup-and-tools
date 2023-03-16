@@ -74,3 +74,23 @@ export FZF_CTRL_T_OPTS="
       ls -AFL --color=always {} 2> /dev/null
     fi'
   --bind 'ctrl-/:change-preview-window(down|hidden|),alt-up:preview-page-up,alt-down:preview-page-down,ctrl-s:toggle-sort'"
+
+if [[ $(uname) =~ Darwin ]]; then
+
+  # Fix alt-c keybinding in macos by binding the
+  # 'ç' symbol to call the fzf-cd-widget function
+  if [ -n "$ZSH_VERSION" ]; then
+    bindkey "ç" fzf-cd-widget
+  elif [ -n "$BASH_VERSION" ]; then
+    bind -m emacs-standard '"ç": " \C-b\C-k \C-u`__fzf_cd__`\e\C-e\er\C-m\C-y\C-h\e \C-y\ey\C-x\C-x\C-d"'
+    bind -m vi-command '"ç": "\C-z\ec\C-z"'
+    bind -m vi-insert '"ç": "\C-z\ec\C-z"'
+  fi
+
+  # Other options include sending the 'Meta' key
+  # 1) Esc-c
+  # 2) Ctrl-[ c
+
+  # Or changing the way the meta key is interpreted in the
+  # configuration of your terminal emulator.
+fi
