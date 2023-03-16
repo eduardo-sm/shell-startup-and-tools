@@ -37,9 +37,25 @@ fcmd () {
     type -f "$cm" 2>/dev/null || type "$cm" 2>/dev/null
   done > "$tmpfile"
 
+  local copy_command=()
+
+  if command -v pbcopy &> /dev/null; then
+    copy_command=(
+      --bind 'ctrl-y:execute-silent(echo -n {} | pbcopy)+abort'
+      --header 'Press CTRL-Y to copy command into clipboard'
+    )
+  elif command -v xsel &> /dev/null; then
+    copy_command=(
+      --bind 'ctrl-y:execute-silent(echo -n {} | xsel -ib)+abort'
+      --header 'Press CTRL-Y to copy command into clipboard'
+    )
+  fi
+
   echo "$available_commands" |
     fzf-defaults \
-      --preview "rg -A 50 -B 1 -m 1 '^{} ' $tmpfile | bat -l bash --color=always -p -H 2" \
+      --preview "
+        rg -A 50 -B 1 -m 1 '^{} ' $tmpfile |
+        bat -l bash --color=always -p -H 2" \
       --preview-window right:70% \
-      --bind 'ctrl-y:execute-silent(echo -n {} | pbcopy)+abort' || return 0
+      "${copy_command[@]}" || return 0
 }
