@@ -36,13 +36,15 @@ or if you already have a configuration file, you can source the file for your sh
 source path/to/repo/config/.bashrc
 ```
 
-**NOTICE**: You need to update paths for the fzf in the respective config file.
+**NOTICE**: You need to update paths for the fzf config files.
 
 ```bash
 # Update the following variables at the top of the file
 
+# Config fzf defaults and keybindings
 fzf_config="$HOME/fzf-config"
 
+# Add functions to environment
 fzf_functions="$HOME/fzf-functions"
 ```
 
