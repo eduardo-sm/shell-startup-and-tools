@@ -4,6 +4,14 @@ Shell startup and tools
 This repository contains examples to configure both `bash` and `zsh` shells
 and a collection of sample scripts for the tools bat, fd, ripgrep and fzf.
 
+# Setup
+
+Clone this repository:
+
+```bash
+git clone https://bitbucket.org/accedo/shell-startup-and-tools.git
+```
+
 # Shell
 
 There are sample configuration files under the config directory.
