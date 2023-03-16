@@ -1,4 +1,15 @@
-# Config file example
+# Config file example for bash
+
+# Add fzf configuration to current session
+# NOTE: Update this path with the location of the fzf-config
+fzf_config="$HOME/fzf-config"
+
+# Add fzf functions to current session
+# NOTE: Update this path with the location of the fzf-functions
+fzf_functions="$HOME/fzf-functions"
+
+# Add $HOME/.local/bin to path if exists
+[ -f $HOME/.local/bin ] && export PATH="$PATH:$HOME/.local/bin"
 
 # Aliases
 # Use aliases for small commands or shorcuts
@@ -49,13 +60,7 @@ if command -v fzf &> /dev/null; then
   # Source keybindings file
   [ -f "$HOME/.fzf.$__shell" ] && source "$HOME/.fzf.$__shell"
 
-  # Add fzf configuration to current session
-  # NOTE: Update this path with the location of the fzf-config
-  fzf_config="$HOME/fzf-config"
   [ -f "$fzf_config" ] && source "$fzf_config"
 
-  # Add fzf functions to current session
-  # NOTE: Update this path with the location of the fzf-functions
-  fzf_functions="$HOME/fzf-functions"
   [ -f "$fzf_functions" ] && source "$fzf_functions"
 fi
