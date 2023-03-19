@@ -16,12 +16,22 @@ if is_command rg; then
 fi
 
 if is_command fd; then
+  # List arguments for exclusion
+  fd_exclude=(
+    --exclude .git
+    --exclude node_modules
+    --exclude Library
+    --exclude .npm
+    --exclude .nvm
+    --exclude .cache
+  )
+
   # Include '--hidden' to show hidden files
   # Include '--no-ignore' to show ignored files like the ones listed in .gitignore
   # Inlcude '--unrestricted' for both --hidden and --no-ignore
 
-  export FZF_CTRL_T_COMMAND="fd --type f --follow --exclude .git --exclude node_modules"
-  export FZF_ALT_C_COMMAND="fd --type d --follow --exclude .git --exclude node_modules"
+  export FZF_CTRL_T_COMMAND="fd --type f --follow ${fd_exclude[@]}"
+  export FZF_ALT_C_COMMAND="fd --type d --follow ${fd_exclude[@]}"
 
   # command for listing path candidates.
   _fzf_compgen_path () {
