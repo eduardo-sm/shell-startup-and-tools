@@ -2,11 +2,13 @@
 
 # Add fzf configuration to current session
 # NOTE: Update this path with the location of the fzf-config
-fzf_config="$HOME/fzf-config"
+fzf_config="config/fzf-config"
+# fzf_config="$HOME/fzf-config"
 
 # Add fzf functions to current session
 # NOTE: Update this path with the location of the fzf-functions
-fzf_functions="$HOME/fzf-functions"
+fzf_functions="config/fzf-functions"
+# fzf_functions="$HOME/fzf-functions"
 
 # Add $HOME/.local/bin to path if exists
 [ -f $HOME/.local/bin ] && export PATH="$PATH:$HOME/.local/bin"
