@@ -2,11 +2,13 @@
 
 # Add fzf configuration to current session
 # NOTE: Update this path with the location of the fzf-config
-fzf_config="$HOME/fzf-config"
+fzf_config="config/fzf-config"
+# fzf_config="$HOME/fzf-config"
 
 # Add fzf functions to current session
 # NOTE: Update this path with the location of the fzf-functions
-fzf_functions="$HOME/fzf-functions"
+fzf_functions="config/fzf-functions"
+# fzf_functions="$HOME/fzf-functions"
 
 # Add $HOME/.local/bin to path if exists
 [ -d $HOME/.local/bin ] && export PATH="$PATH:$HOME/.local/bin"
@@ -17,9 +19,11 @@ case $(uname) in
   Darwin*)
     # macos uses -G for color output
     alias ll="ls -lAhFG"
+    alias l="ls -AFG"
     ;;
   *)
     alias ll="ls -lAhF --color=auto"
+    alias l="ls -AF --color=auto"
     ;;
 esac
 
