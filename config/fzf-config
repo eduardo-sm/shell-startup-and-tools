@@ -7,6 +7,9 @@ is_command () {
 	command -v "$1" &> /dev/null
 }
 
+# Default options that will be applied to all fzf commands
+export FZF_DEFAULT_OPTS="--height 80% --layout=reverse --border"
+
 if is_command rg; then
   # Include '--hidden' to show hidden files
   # Include '--no-ignore' to show ignored files like the ones listed in .gitignore
