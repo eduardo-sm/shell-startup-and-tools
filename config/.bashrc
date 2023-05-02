@@ -19,9 +19,11 @@ case $(uname) in
   Darwin*)
     # macos uses -G for color output
     alias ll="ls -lAhFG"
+    alias l="ls -AFG"
     ;;
   *)
     alias ll="ls -lAhF --color=auto"
+    alias l="ls -AF --color=auto"
     ;;
 esac
 
