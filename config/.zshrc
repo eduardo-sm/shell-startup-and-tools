@@ -9,12 +9,20 @@ fzf_config="$HOME/fzf-config"
 fzf_functions="$HOME/fzf-functions"
 
 # Add $HOME/.local/bin to path if exists
-[ -f $HOME/.local/bin ] && export PATH="$PATH:$HOME/.local/bin"
+[ -d $HOME/.local/bin ] && export PATH="$PATH:$HOME/.local/bin"
 
 # Aliases
 # Use aliases for small commands or shorcuts
-alias ll="ls -lAhF" # Use --color=auto for color output. In macos use -G instead or install core utils.
-alias ..="cd .."
+case $(uname) in
+  Darwin*)
+    # macos uses -G for color output
+    alias ll="ls -lAhFG"
+    ;;
+  *)
+    alias ll="ls -lAhF --color=auto"
+    ;;
+esac
+
 alias gs="git status"
 alias nr="npm run"
 
@@ -22,7 +30,7 @@ alias nr="npm run"
 # Use functions for more complext logic
 
 # Move up n directories. Will move up 1 if no arguments.
-up () {
+.. () {
   local d=""
   local limit="$1"
 
@@ -39,6 +47,10 @@ up () {
   if ! cd "$d"; then
     echo "Couldn't go up $limit dirs."
   fi
+}
+
+... () {
+  .. 2
 }
 
 # NOTE: You can use $(basename $SHELL) to return the name of the login SHELL
