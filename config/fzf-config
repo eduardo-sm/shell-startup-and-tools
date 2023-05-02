@@ -66,6 +66,13 @@ elif is_command xsel; then
     --bind 'ctrl-y:execute-silent(echo -n {2..} | xsel -ib)+abort'
     --color header:italic
     --header 'Press CTRL-Y to copy command into clipboard'"
+elif is_command pbcopy.exe; then
+  export FZF_CTRL_R_OPTS="
+    --preview 'echo {}' --preview-window up:3:hidden:wrap
+    --bind 'ctrl-/:toggle-preview'
+    --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy.exe)+abort'
+    --color header:italic
+    --header 'Press CTRL-Y to copy command into clipboard'"
 else
   export FZF_CTRL_R_OPTS="
     --preview 'echo {}' --preview-window up:3:hidden:wrap

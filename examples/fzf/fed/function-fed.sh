@@ -24,5 +24,5 @@ fed () {
   if [ -n "$2" ] && [ "$2" != "-" ]; then
     editor="$2"
   fi
-  $editor "$selection[@]"
+  $editor "${selection[@]}"
 }

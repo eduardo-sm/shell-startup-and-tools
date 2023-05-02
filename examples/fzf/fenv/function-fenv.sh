@@ -20,12 +20,17 @@ fenv () {
 
   if command -v pbcopy &> /dev/null; then
     copy_command=(
-      --bind 'ctrl-y:execute-silent(printf \"%q\" {} | pbcopy)+abort'
+      --bind 'ctrl-y:execute-silent(printf "%q" {} | pbcopy)+abort'
       --header 'Press CTRL-Y to copy command into clipboard'
     )
   elif command -v xsel &> /dev/null; then
     copy_command=(
       --bind 'ctrl-y:execute-silent(printf "%q" {} | xsel -ib)+abort'
+      --header 'Press CTRL-Y to copy command into clipboard'
+    )
+  elif command -v pbcopy.exe &> /dev/null; then
+    copy_command=(
+      --bind 'ctrl-y:execute-silent(printf "%q" {} | pbcopy.exe)+abort'
       --header 'Press CTRL-Y to copy command into clipboard'
     )
   fi

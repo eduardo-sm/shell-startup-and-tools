@@ -49,6 +49,11 @@ fcmd () {
       --bind 'ctrl-y:execute-silent(echo -n {} | xsel -ib)+abort'
       --header 'Press CTRL-Y to copy command into clipboard'
     )
+  elif command -v pbcopy.exe &> /dev/null; then
+    copy_command=(
+      --bind 'ctrl-y:execute-silent(echo -n {} | pbcopy.exe)+abort'
+      --header 'Press CTRL-Y to copy command into clipboard'
+    )
   fi
 
   echo "$available_commands" |
