@@ -36,19 +36,27 @@ or if you already have a configuration file, you can source the file for your sh
 source path/to/repo/config/.bashrc
 ```
 
-**NOTICE**: You need to update paths for the fzf config files.
+**NOTICE**: You need to update paths for the following variables.
+
+- fzf_config: Path to fzf-config file.
+  - Add custom fzf configuration for keybindings and autocompletion.
+- fzf_functions: Path to fzf-functions file.
+  - Add utility functions that use fzf.
+- rfv_script: Path to rfv script.
+  - Add rfv function to session (Or you can add the script to your path like ~/.local/bin).
 
 ```bash
 # Update the following variables at the top of the file
 
 # Config fzf defaults and keybindings
-fzf_config="$HOME/fzf-config"
+fzf_config="config/fzf-config"
 
 # Add functions to environment
-fzf_functions="$HOME/fzf-functions"
-```
+fzf_functions="config/fzf-functions"
 
-You can set things like aliases, functions and other configurations for your session.
+# rfv script location
+rfv_script="$(pwd)/examples/fzf/rfv/rfv"
+```
 
 ## Plugins (Zsh only)
 
