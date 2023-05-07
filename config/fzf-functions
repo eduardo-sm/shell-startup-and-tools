@@ -84,13 +84,13 @@ fed () {
     pattern="$location"
     location="$HOME"
   fi
-  local selection=$(fd -L -tf "$pattern" "$location" |
+  local selection=($(fd -L -tf "$pattern" "$location" |
     fzf --height 50% --min-height 20 --border \
-      --bind ctrl-/:toggle-preview,alt-up:preview-page-up,alt-down:preview-page-down \
+      --bind "ctrl-/:toggle-preview,alt-up:preview-page-up,alt-down:preview-page-down" \
       --multi \
       --preview "bat --color=always --style=numbers {}" \
       --header "(ctrl-/) Search in: $location" \
-      --query "$query")
+      --query "$query"))
   if [ -z "$selection" ]; then
     return
   fi
