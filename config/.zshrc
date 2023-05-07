@@ -2,19 +2,31 @@
 
 # Add fzf configuration to current session
 # NOTE: Update this path with the location of the fzf-config
-fzf_config="$HOME/fzf-config"
+fzf_config="config/fzf-config"
+# fzf_config="$HOME/fzf-config"
 
 # Add fzf functions to current session
 # NOTE: Update this path with the location of the fzf-functions
-fzf_functions="$HOME/fzf-functions"
+fzf_functions="config/fzf-functions"
+# fzf_functions="$HOME/fzf-functions"
 
 # Add $HOME/.local/bin to path if exists
-[ -f $HOME/.local/bin ] && export PATH="$PATH:$HOME/.local/bin"
+[ -d $HOME/.local/bin ] && export PATH="$PATH:$HOME/.local/bin"
 
 # Aliases
 # Use aliases for small commands or shorcuts
-alias ll="ls -lAhF" # Use --color=auto for color output. In macos use -G instead or install core utils.
-alias ..="cd .."
+case $(uname) in
+  Darwin*)
+    # macos uses -G for color output
+    alias ll="ls -lAhFG"
+    alias l="ls -AFG"
+    ;;
+  *)
+    alias ll="ls -lAhF --color=auto"
+    alias l="ls -AF --color=auto"
+    ;;
+esac
+
 alias gs="git status"
 alias nr="npm run"
 
@@ -22,7 +34,7 @@ alias nr="npm run"
 # Use functions for more complext logic
 
 # Move up n directories. Will move up 1 if no arguments.
-up () {
+.. () {
   local d=""
   local limit="$1"
 
@@ -64,6 +76,10 @@ if command -v fzf &> /dev/null; then
 
   [ -f "$fzf_functions" ] && source "$fzf_functions"
 fi
+
+# Add bash completion
+autoload -U bashcompinit
+bashcompinit
 
 # ZSH Plugins
 

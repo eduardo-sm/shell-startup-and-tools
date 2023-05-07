@@ -13,7 +13,7 @@ fed () {
   local selection=$(fd -L -tf "$pattern" "$location" |
     fzf --height 50% --min-height 20 --border \
       --bind ctrl-/:toggle-preview,alt-up:preview-page-up,alt-down:preview-page-down \
-      --header 'Press CTRL-/ to toggle preview' \
+      --multi \
       --preview "bat --color=always --style=numbers {}" \
       --header "(ctrl-/) Search in: $location" \
       --query "$query")
@@ -23,5 +23,5 @@ fed () {
   if [ -n "$2" ] && [ "$2" != "-" ]; then
     editor="$2"
   fi
-  $editor "$selection"
+  $editor "${selection[@]}"
 }

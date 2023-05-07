@@ -8,7 +8,8 @@ getShellAliasAndFunctions () {
       # Functions
       typeset -F | awk '{ if ( $3 !~ /_.+/) { print $3 } }';
       # Aliases
-      alias | awk '{ split($2,o,"="); print o[1] }'
+      compgen -a
+      # alias | awk '{ split($2,o,"="); print o[1] }'
     }
   else
     {
@@ -17,8 +18,9 @@ getShellAliasAndFunctions () {
       print -l ${(ok)functions} |
         awk '{ if ($1 !~ /^_.+/) { print $1 } }';
       # Aliases
-      # alias | cut -d '=' -f 1
       compgen -a
+      # Only works if bashcompinit is set. Alternative:
+      # alias | cut -d '=' -f 1
     }
   fi
 }
@@ -47,6 +49,11 @@ fcmd () {
   elif command -v xsel &> /dev/null; then
     copy_command=(
       --bind 'ctrl-y:execute-silent(echo -n {} | xsel -ib)+abort'
+      --header 'Press CTRL-Y to copy command into clipboard'
+    )
+  elif command -v pbcopy.exe &> /dev/null; then
+    copy_command=(
+      --bind 'ctrl-y:execute-silent(echo -n {} | pbcopy.exe)+abort'
       --header 'Press CTRL-Y to copy command into clipboard'
     )
   fi

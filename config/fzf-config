@@ -7,6 +7,9 @@ is_command () {
 	command -v "$1" &> /dev/null
 }
 
+# Default options that will be applied to all fzf commands
+export FZF_DEFAULT_OPTS="--height 80% --layout=reverse --border"
+
 if is_command rg; then
   # Include '--hidden' to show hidden files
   # Include '--no-ignore' to show ignored files like the ones listed in .gitignore
@@ -61,6 +64,13 @@ elif is_command xsel; then
     --preview 'echo {}' --preview-window up:3:hidden:wrap
     --bind 'ctrl-/:toggle-preview'
     --bind 'ctrl-y:execute-silent(echo -n {2..} | xsel -ib)+abort'
+    --color header:italic
+    --header 'Press CTRL-Y to copy command into clipboard'"
+elif is_command pbcopy.exe; then
+  export FZF_CTRL_R_OPTS="
+    --preview 'echo {}' --preview-window up:3:hidden:wrap
+    --bind 'ctrl-/:toggle-preview'
+    --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy.exe)+abort'
     --color header:italic
     --header 'Press CTRL-Y to copy command into clipboard'"
 else
