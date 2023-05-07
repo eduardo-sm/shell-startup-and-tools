@@ -10,6 +10,10 @@ fzf_config="config/fzf-config"
 fzf_functions="config/fzf-functions"
 # fzf_functions="$HOME/fzf-functions"
 
+# Update location as needed
+# Default to current repo location
+rfv_script="$(pwd)/examples/fzf/rfv/rfv"
+
 # Add $HOME/.local/bin to path if exists
 [ -d $HOME/.local/bin ] && export PATH="$PATH:$HOME/.local/bin"
 
@@ -52,6 +56,14 @@ alias nr="npm run"
     echo "Couldn't go up $limit dirs."
   fi
 }
+
+if [ -f "$rfv_script" ]; then
+  # Requires ripgrep and fzf
+  # Find a file using ripgrep, change to fzf for narrow results, open selection in vim
+  rfv () {
+    "$rfv_script" "$@"
+  }
+fi
 
 # NOTE: You can use $(basename $SHELL) to return the name of the login SHELL
 # __shell="$(basename $SHELL)"
