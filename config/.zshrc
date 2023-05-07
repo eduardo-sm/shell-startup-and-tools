@@ -53,10 +53,6 @@ alias nr="npm run"
   fi
 }
 
-... () {
-  .. 2
-}
-
 # NOTE: You can use $(basename $SHELL) to return the name of the login SHELL
 # __shell="$(basename $SHELL)"
 __shell="zsh"
@@ -80,6 +76,10 @@ if command -v fzf &> /dev/null; then
 
   [ -f "$fzf_functions" ] && source "$fzf_functions"
 fi
+
+# Add bash completion
+autoload -U bashcompinit
+bashcompinit
 
 # ZSH Plugins
 

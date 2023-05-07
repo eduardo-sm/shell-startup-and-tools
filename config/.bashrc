@@ -53,10 +53,6 @@ alias nr="npm run"
   fi
 }
 
-... () {
-  .. 2
-}
-
 # NOTE: You can use $(basename $SHELL) to return the name of the login SHELL
 # __shell="$(basename $SHELL)"
 __shell="bash"
