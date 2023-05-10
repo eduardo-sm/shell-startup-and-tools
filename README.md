@@ -14,6 +14,7 @@ git clone https://bitbucket.org/accedo/shell-startup-and-tools.git
 
 # Shell
 
+## Usage
 There are sample configuration files under the config directory.
 
 - config/.bashrc
@@ -35,6 +36,7 @@ or if you already have a configuration file, you can source the file for your sh
 # In .bashrc
 source path/to/repo/config/.bashrc
 ```
+You can add that line to your config file (bashrc/zshrc).
 
 **NOTICE**: You need to update paths for the following variables.
 
@@ -55,7 +57,7 @@ fzf_config="config/fzf-config"
 fzf_functions="config/fzf-functions"
 
 # rfv script location
-rfv_script="$(pwd)/examples/fzf/rfv/rfv"
+rfv_script="examples/fzf/rfv/rfv"
 ```
 
 ## Plugins (Zsh only)
@@ -103,3 +105,77 @@ cp examples/fzf/fshow/fshow ~/.local/bin
 # Now you can call directly
 fshow
 ```
+
+# Project Structure
+The project structure is as follows:
+
+```bash
+.
+├── config
+│   ├── fzf-config
+│   └── fzf-functions
+├── examples
+│   ├── bat
+│   │   ├── bat-demo.sh
+│   │   ├── first-text.sh
+│   │   └── second-text.sh
+│   ├── fd
+│   │   └── search-pdf
+│   ├── fzf
+│   │   ├── bdiff
+│   │   │   ├── bdiff
+│   │   │   └── function-bdiff.sh
+│   │   ├── fadd
+│   │   │   ├── fadd
+│   │   │   └── function-fadd.sh
+│   │   ├── fcmd
+│   │   │   ├── fcmd
+│   │   │   └── function-fcmd.sh
+│   │   ├── fco
+│   │   │   ├── fco
+│   │   │   └── function-fco.sh
+│   │   ├── fdirs
+│   │   │   └── function-fdirs.sh
+│   │   ├── fed
+│   │   │   ├── fed
+│   │   │   └── function-fed.sh
+│   │   ├── fenv
+│   │   │   ├── fenv
+│   │   │   └── function-fenv.sh
+│   │   ├── fif
+│   │   │   ├── fif
+│   │   │   └── function-fif.sh
+│   │   ├── fnr
+│   │   │   ├── fnr
+│   │   │   └── function-fnr.sh
+│   │   ├── fshow
+│   │   │   ├── fshow
+│   │   │   └── function-fshow.sh
+│   │   ├── fsw
+│   │   │   ├── fsw
+│   │   │   └── function-fsw.sh
+│   │   ├── fzf-defaults
+│   │   │   ├── function-fzf-defaults.sh
+│   │   │   └── fzf-defaults
+│   │   └── rfv
+│   │       └── rfv
+│   └── ripgrep
+│       ├── env-search
+│       ├── file-version
+│       ├── user-search
+│       └── user-search-highlight
+├── helpers
+│   ├── config.xml
+│   └── source-all-functions.sh
+├── package.json
+├── plugins
+│   ├── install-zsh-autosuggestions.sh
+│   └── install-zsh-syntax-highlighting.sh
+└── README.md
+```
+
+The main areas are:
+- config: Configuration files for a terminal session.
+- examples: Script and functions to test tools.
+- helpers: Utility files used by the examples or scripts.
+- plugins: Installation scripts for plugins (zsh only).
