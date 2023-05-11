@@ -174,6 +174,10 @@ The project structure is as follows:
 └── README.md
 ```
 
+**NOTICE**: The commands `fenv` and `fcmd` (function and script version) depend of the function `fzf-defaults` as an example of composition.
+If you plan to use any of them independently, don't forget to copy the missing configuration from `fzf-defaults` into the function/script
+you plan to use.
+
 The main areas are:
 - config: Configuration files for a terminal session.
 - examples: Script and functions to test tools.
