@@ -57,7 +57,7 @@ fzf_config="config/fzf-config"
 fzf_functions="config/fzf-functions"
 
 # rfv script location
-rfv_script="examples/fzf/rfv/rfv"
+rfv_script="$(pwd)/examples/fzf/rfv/rfv"
 ```
 
 ## Plugins (Zsh only)

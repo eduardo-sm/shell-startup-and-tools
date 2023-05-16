@@ -12,7 +12,7 @@ fzf_functions="config/fzf-functions"
 
 # Update location as needed
 # Default to current repo location
-rfv_script="examples/fzf/rfv/rfv"
+rfv_script="$(pwd)/examples/fzf/rfv/rfv"
 
 # Add $HOME/.local/bin to path if exists
 [ -d $HOME/.local/bin ] && export PATH="$PATH:$HOME/.local/bin"
