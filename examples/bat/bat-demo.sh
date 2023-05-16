@@ -13,7 +13,7 @@ echo ""
 bat --paging=always "$SCRIPT_DIR/first-text.sh"
 bat -p --paging=always "$SCRIPT_DIR/second-text.sh"
 
-printf "> bat $FSHOW_SCRIPT\n"
+printf "> bat -pp $FSHOW_SCRIPT\n"
 bat -pp "$FSHOW_SCRIPT"
 echo ""
 
@@ -21,5 +21,5 @@ printf "> bat $PACKAGE_JSON\n"
 bat -pp --theme="Monokai Extended" "$PACKAGE_JSON"
 echo ""
 
-printf "> bat $SCRIPT_DIR\n"
+printf "> bat -pp $SCRIPT_DIR\n"
 bat -pp "$RFV_SCRIPT"
